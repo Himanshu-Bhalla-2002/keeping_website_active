@@ -13,10 +13,8 @@
         let successCount = 0;  // Initialize counter
 
         function keepAlive() {
-          fetch('https://culnarychronicles.onrender.com/')
-            .then(response => response.json())
-            .then(data => {
-              console.log(data);
+          fetch('https://culnarychronicles.onrender.com/', { mode: 'no-cors' })  // Added 'no-cors' mode
+            .then(() => {
               successCount++;  // Increment counter on success
               console.log(`Call successful ${successCount} time(s)`);
 
@@ -30,7 +28,7 @@
         keepAlive();
 
         // Run the keepAlive function every 10 minutes
-        setInterval(keepAlive, 1 * 60 * 1000);
+        setInterval(keepAlive, 10 * 60 * 1000);  // Changed to 10 minutes
     </script>
 </body>
 </html>
