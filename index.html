@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Website</title>
+</head>
+<body>
+
+    <!-- Your content here -->
+
+    <div id="successCount">Call successful 0 time(s)</div>
+
+    <script>
+        let successCount = 0;  // Initialize counter
+
+        function keepAlive() {
+          fetch('https://culnarychronicles.onrender.com/')
+            .then(response => response.json())
+            .then(data => {
+              console.log(data);
+              successCount++;  // Increment counter on success
+              console.log(`Call successful ${successCount} time(s)`);
+
+              // Update the frontend
+              document.getElementById('successCount').innerText = `Call successful ${successCount} time(s)`;
+            })
+            .catch((error) => console.error('Error:', error));
+        }
+
+        // Call the function immediately upon page load
+        keepAlive();
+
+        // Run the keepAlive function every 10 minutes
+        setInterval(keepAlive, 10 * 60 * 1000);
+    </script>
+</body>
+</html>
