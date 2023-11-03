@@ -7,28 +7,40 @@
 
     <!-- Your content here -->
 
-    <div id="successCount">Call successful 0 time(s)</div>
+    <div id="successCount">Call to Culinary Chronicles successful 0 time(s)</div>
+    <div id="palettePicksCount">Call to Palette Picks successful 0 time(s)</div>
 
     <script>
-        let successCount = 0;  // Initialize counter
+        let successCount = 0;  // Initialize counter for Culinary Chronicles
+        let palettePicksCount = 0;  // Initialize counter for Palette Picks
 
-        function keepAlive() {
-          fetch('https://culnarychronicles.onrender.com/', { mode: 'no-cors' })  // Added 'no-cors' mode
+        function keepAliveCulinary() {
+          fetch('https://culnarychronicles.onrender.com/', { mode: 'no-cors' })
             .then(() => {
-              successCount++;  // Increment counter on success
-              console.log(`Call successful ${successCount} time(s)`);
-
-              // Update the frontend
-              document.getElementById('successCount').innerText = `Call successful ${successCount} time(s)`;
+              successCount++;
+              console.log(`Call to Culinary Chronicles successful ${successCount} time(s)`);
+              document.getElementById('successCount').innerText = `Call to Culinary Chronicles successful ${successCount} time(s)`;
             })
-            .catch((error) => console.error('Error:', error));
+            .catch((error) => console.error('Culinary Chronicles Error:', error));
         }
 
-        // Call the function immediately upon page load
-        keepAlive();
+        function keepAlivePalettePicks() {
+          fetch('https://palette-picks2.vercel.app/', { mode: 'no-cors' })
+            .then(() => {
+              palettePicksCount++;
+              console.log(`Call to Palette Picks successful ${palettePicksCount} time(s)`);
+              document.getElementById('palettePicksCount').innerText = `Call to Palette Picks successful ${palettePicksCount} time(s)`;
+            })
+            .catch((error) => console.error('Palette Picks Error:', error));
+        }
 
-        // Run the keepAlive function every 10 minutes
-        setInterval(keepAlive, 10 * 60 * 1000);  // Changed to 10 minutes
+        // Call the functions immediately upon page load
+        keepAliveCulinary();
+        keepAlivePalettePicks();
+
+        // Run the keepAlive function every 45 minutes for both APIs
+        setInterval(keepAliveCulinary, 45 * 60 * 1000);
+        setInterval(keepAlivePalettePicks, 45 * 60 * 1000);
     </script>
 </body>
 </html>
